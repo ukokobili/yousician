@@ -1,0 +1,13 @@
+yousician:
+  outputs:
+    dev:
+      type: duckdb
+      path: "md:yousician_dev?motherduck_token={{ env_var('MOTHERDUCK_TOKEN') }}"
+      threads: 1
+    
+    prod:
+      type: duckdb
+      path: "md:yousician_prod?motherduck_token={{ env_var('MOTHERDUCK_TOKEN') }}"
+      threads: 4
+  
+  target: dev
