@@ -1,2 +1,3 @@
+sqlfluff
 shandy-sqlfmt
-sqlfluff 
+sqlfluff-templater-dbt

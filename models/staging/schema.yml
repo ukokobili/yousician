@@ -1,0 +1,185 @@
+models:
+  - name: stg__ae_ad_network_campaign_updates
+    description: "Staging table for ad network campaign updates"
+    columns:
+      - name: campaign_id
+        data_type: bigint
+        description: "Unique identifier for the ad campaign"
+        data_tests: 
+          - not_null
+          - unique
+
+      - name: updated_date
+        data_type: date
+        description: "Date when the campaign was last updated"
+        data_tests:
+          - dbt_expectations.expect_column_values_to_be_in_type_list:
+              arguments:
+                column_type_list: [date, datetime]
+
+      - name: campaign_name
+        data_type: varchar
+        description: "Name of the ad campaign"
+        data_tests: 
+          - not_null
+          - unique
+
+      - name: loaded_at
+        data_type: timestamp with time zone
+        description: "Timestamp when the data was loaded"
+
+  - name: stg__ae_ad_network_country_report
+    description: "Staging table for ad network performance by country"
+    columns:
+      - name: date
+        data_type: date
+        description: "Date of the ad performance data"
+        data_tests:
+          - dbt_expectations.expect_column_values_to_be_in_type_list:
+              arguments:
+                column_type_list: [date, datetime]
+
+      - name: campaign_id
+        data_type: bigint
+        description: "Unique identifier for the ad campaign"
+        data_tests: 
+          - not_null
+
+      - name: country_id
+        data_type: bigint
+        description: "Unique identifier for the country"
+        data_tests: 
+          - not_null
+
+      - name: spend
+        data_type: double
+        description: "Total spend for the ad campaign on the given date and country"
+
+      - name: impressions
+        data_type: bigint
+        description: "Total impressions for the ad campaign on the given date and country"
+
+      - name: clicks
+        data_type: bigint
+        description: "Total clicks for the ad campaign on the given date and country"
+
+      - name: loaded_at
+        data_type: timestamp with time zone
+        description: "Timestamp when the data was loaded"
+
+  - name: stg__ae_ad_network_detailed_report
+    description: "Staging table for ad network detailed report"
+    columns:
+      - name: date
+        data_type: date
+        description: "Date of the ad performance data"
+        data_tests:
+          - dbt_expectations.expect_column_values_to_be_in_type_list:
+              arguments:
+                column_type_list: [date, datetime]
+
+      - name: campaign_id
+        data_type: bigint
+        description: "Unique identifier for the ad campaign"
+        data_tests: 
+          - not_null
+
+      - name: country_id
+        data_type: bigint
+        description: "Unique identifier for the country"
+        data_tests: 
+          - not_null
+
+      - name: state_id
+        data_type: bigint
+        description: "Unique identifier for the state"
+        data_tests: 
+          - not_null
+
+      - name: spend
+        data_type: double
+        description: "Total spend for the ad campaign on the given date and state"
+
+      - name: impressions
+        data_type: bigint
+        description: "Total impressions for the ad campaign on the given date and state"
+
+      - name: clicks
+        data_type: bigint
+        description: "Total clicks for the ad campaign on the given date and state"
+
+      - name: loaded_at
+        data_type: timestamp with time zone
+        description: "Timestamp when the data was loaded"
+
+  - name: stg__ae_ad_network_geo_dictionary
+    description: "Staging table for ad network geo dictionary"
+    columns:
+      - name: location_id
+        data_type: bigint
+        description: "Unique identifier for the location"
+        data_tests: 
+          - not_null
+
+      - name: country_code
+        data_type: varchar
+        description: "Unique identifier for the country"
+
+      - name: location_name
+        data_type: varchar
+        description: "Name of the location"
+
+      - name: location_type
+        data_type: varchar
+        description: "Type of the location (e.g., city, region)"
+
+      - name: loaded_at
+        data_type: timestamp with time zone
+        description: "Timestamp when the data was loaded"
+
+  - name: stg__ae_ad_network_report_2
+    description: "Staging table for ad network report 2"
+    columns:
+      - name: date
+        data_type: date
+        description: "Date of the ad performance data"
+        data_tests:
+          - dbt_expectations.expect_column_values_to_be_in_type_list:
+              arguments:
+                column_type_list: [date, datetime]
+
+      - name: campaign_id
+        data_type: bigint
+        description: "Unique identifier for the ad campaign"
+        data_tests: 
+          - not_null
+
+      - name: campaign_name
+        data_type: varchar
+        description: "Name of the ad campaign"
+        data_tests: 
+          - not_null
+
+      - name: country_code
+        data_type: "null"
+        description: "Unique identifier for the country"
+
+      - name: state_name
+        data_type: "null"
+        description: "Name of the state"
+
+      - name: spend
+        data_type: double
+        description: "Total spend for the ad campaign on the given date and state"
+
+      - name: impressions
+        data_type: bigint
+        description: "Total impressions for the ad campaign on the given date and state"
+
+      - name: clicks
+        data_type: bigint
+        description: "Total clicks for the ad campaign on the given date and state"
+
+      - name: loaded_at
+        data_type: timestamp with time zone
+        description: "Timestamp when the data was loaded"

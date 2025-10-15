@@ -31,6 +31,15 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   yousician:
-    # Config indicated by + and applies to all files under models/example/
-    example:
+    +required_docs: true
+    staging:
+      +required_tests: {"unique.*|not_null": 1}
       +materialized: view
+      +schema: staging
+    intermediate:
+      +materialized: ephemeral
+      +schema: intermediate
+    marts:
+      +required_tests: {"not_null": 1}
+      +materialized: table
+      +schema: marts

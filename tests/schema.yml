@@ -1,0 +1,6 @@
+version: 2
+data_tests:
+  - name: assert_ctr_formula
+    description: >
+      The click-through rate (CTR) is calculated as clicks / impressions.
+      Therefore return records where CTR != clicks / impressions to make the test fail.

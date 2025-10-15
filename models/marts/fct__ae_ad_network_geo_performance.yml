@@ -1,0 +1,76 @@
+models:
+  - name: fct__ae_ad_network_geo_performance
+    description: "Fact table for ad network performance by geo"
+    columns:
+      - name: date
+        data_type: date
+        description: "Date of the ad performance data"
+
+      - name: campaign_id
+        data_type: bigint
+        description: "Unique identifier for the ad campaign"
+        data_tests:
+          - not_null
+
+      - name: campaign_name
+        data_type: varchar
+        description: "Name of the ad campaign"
+        data_tests:
+          - not_null
+
+      - name: source
+        data_type: varchar
+        description: "Source of the ad traffic (e.g., Ad Network 1, Ad Network 2)"
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Ad Network 1', 'Ad Network 2']
+
+      - name: country_code
+        data_type: varchar
+        description: "Country code of the ad performance data"
+
+      - name: state_name
+        data_type: varchar
+        description: "State name of the ad performance data"
+
+      - name: spend
+        data_type: double
+        description: "Total spend for the ad campaign on the given date and geo"
+        data_tests:
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: "{{spend}} >= 0"
+
+      - name: impressions
+        data_type: bigint
+        description: "Total impressions for the ad campaign on the given date and geo"
+        data_tests:
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: "{{impressions}} >= 0"
+
+      - name: clicks
+        data_type: bigint
+        description: "Total clicks for the ad campaign on the given date and geo"
+        data_tests:
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: "{{clicks}} >= 0"
+
+      - name: ctr
+        data_type: double
+        description: "Click-through rate for the ad campaign on the given date and geo"
+
+      - name: cpc
+        data_type: double
+        description: "Cost per click for the ad campaign on the given date and geo"
+
+      - name: cpm
+        data_type: double
+        description: "Cost per thousand impressions for the ad campaign on the given date and geo"
+
+      - name: loaded_at
+        data_type: timestamp with time zone
+        description: "Timestamp when the data was loaded"

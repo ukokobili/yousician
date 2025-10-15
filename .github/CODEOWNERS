@@ -1,0 +1,15 @@
+##############################################################
+#
+# List of approvers/reviewers for Project
+#
+##############################################################
+
+# These owners will be the default owners for everything in the repo.
+* @Jacob Ukokobili 
+
+# Owners for specific folders or files
+/models/marts @Jacob Ukokobili 
+.github/* @Jacob Ukokobili 
+.sqlfluff @Jacob Ukokobili 
+dbt_project.yml @Jacob Ukokobili 
+packages.yml @Jacob Ukokobili 
