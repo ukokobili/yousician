@@ -32,6 +32,12 @@ pull:
 fmt:
 	sqlfmt models
 
+lint:
+	sqlfluff lint models/ --dialect duckdb
+	
+fix:
+	sqlfluff fix models/ --dialect duckdb
+
 #######################################################################################
 # Make the env_vars.sh script executable
 chmodx:

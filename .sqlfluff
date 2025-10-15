@@ -1,0 +1,17 @@
+[sqlfluff]
+dialect = duckdb
+templater = dbt
+
+[sqlfluff:indentation]
+tab_space_size = 4
+indent_unit = space
+
+[sqlfluff:rules:layout.indent]
+indent_unit = space
+
+[sqlfluff:rules:jinja.padding]
+spacing_before = 1
+spacing_after = 1
+
+[sqlfluff:rules:capitalisation.keywords]
+capitalisation_policy = lower

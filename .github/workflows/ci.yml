@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ main ]
+
+env:
+  DBT_PROFILES_DIR: .
+
+jobs:
+  dbt-ci:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Fetch all history for all branches and tags
+    
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+        cache: 'pip'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Validate branch name
+      run: |
+        if [[ ! ${{ github.head_ref }} =~ ^(feature|hotfix|release)/[a-z0-9_]+$ ]]; then
+          echo "Invalid branch name: ${{ github.head_ref }}"
+          echo "Branch names should follow the pattern: feature/*, hotfix/*, or release/*"
+          exit 1
+        fi
+    
+    - name: Install dbt dependencies
+      run: dbt deps
+    
+    # Add MotherDuck token as an environment variable
+    - name: Set MotherDuck token
+      run: |
+        echo "MOTHERDUCK_TOKEN=${{ secrets.MOTHERDUCK_TOKEN }}" >> $GITHUB_ENV
+
+    - name: Check required tests
+      run: |
+        dbt run-operation required_tests --profiles-dir . --project-dir . --target dev
+    
+    - name: Run Slim CI
+      run: |
+        dbt compile --profiles-dir . --project-dir . --target prod --target-path=prod-run-artifacts
+        dbt compile --profiles-dir . --project-dir . --target dev
+        MODIFIED_MODELS=$(dbt ls --select state:modified+ --defer --state=prod-run-artifacts --profiles-dir . --project-dir . --target dev)
+        if [ -n "$MODIFIED_MODELS" ]; then
+          dbt run --select state:modified+ --defer --state=prod-run-artifacts --profiles-dir . --project-dir . --target dev
+          dbt test --select state:modified+ --defer --state=prod-run-artifacts --profiles-dir . --project-dir . --target dev
+        else
+          echo "No modified models found. Skipping run and test."
+        fi
+        
+    # Uncomment if you want to use SQLFluff
+    - name: Run SQLFluff
+      run: |
+        sqlfluff lint models/ --dialect duckdb

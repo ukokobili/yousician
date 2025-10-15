@@ -1,2 +1,5 @@
+dbt-core
+dbt-duckdb
+sqlfluff
 shandy-sqlfmt
-sqlfluff 
+sqlfluff-templater-dbt

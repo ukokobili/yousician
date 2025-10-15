@@ -1,0 +1,47 @@
+version: 2
+
+sources:
+  - name: ad_network
+    description: "Raw data from various sources"
+    database: yousician
+    schema: main
+    tables:
+      - name: ae_ad_network_campaign_updates
+        description: "Table containing campaign update data."
+        columns:
+          - name: CAMPAIGN_ID
+            description: "Unique identifier for the campaign."
+            data_tests:
+              - not_null
+
+      - name: ae_ad_network_country_report
+        description: "Table containing country-specific ad network reports."
+        columns:
+          - name: CAMPAIGN_ID
+            description: "Unique identifier for the campaign."
+            data_tests:
+              - not_null
+
+      - name: ae_ad_network_detailed_report
+        description: "Table containing detailed ad network reports."
+        columns:
+          - name: CAMPAIGN_ID
+            description: "Unique identifier for the campaign."
+            data_tests:
+              - not_null
+
+      - name: ae_ad_network_geo_dictionary
+        description: "Table containing geographical information for ad networks."
+        columns:
+          - name: ID
+            description: "Unique identifier for the geographical entry."
+            data_tests:
+              - not_null
+
+      - name: ae_ad_network_report_2
+        description: "Table containing ad network report 2."
+        columns:
+          - name: ID
+            description: "Unique identifier for the report."
+            data_tests:
+              - not_null

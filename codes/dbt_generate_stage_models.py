@@ -8,18 +8,16 @@ output_dir = 'models/staging/'
 os.makedirs(output_dir, exist_ok=True)
 
 # Define the models to generate
-source_name = "go_coffee_shop"
+source_name = "ad_network"
 tables = [
-    "menu_items",
-    "payment_methods",
-    "stores",
-    "transaction_items",
-    "transactions",
-    "users",
-    "vouchers"
+    "ae_ad_network_campaign_updates",
+    "ae_ad_network_country_report",
+    "ae_ad_network_detailed_report",
+    "ae_ad_network_report_2",
+    "ae_ad_network_geo_dictionary"
     ]
 
-prefix = 'stg__'
+prefix = 'stg_'
 materialized = 'view'
 
 # Function to call dbt to generate the base model content
