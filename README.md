@@ -24,6 +24,10 @@ The raw CSVs provided in the brief are registered as dbt sources (see `models/so
 | `ae_ad_network_detailed_report` | State-level daily metrics for Ad Network 1 |
 | `ae_ad_network_report_2` | Daily metrics for Ad Network 2, already denormalized |
 
+## Documentation
+
+Generated dbt docs live on GitHub Pages and provide model lineage, column definitions, and tests. Explore the hosted site here: [Ovecell dbt docs](https://ukokobili.github.io/yousician/#!/overview).
+
 ## Data Modeling Approach
 
 The dbt project follows a three-layer convention:
@@ -34,7 +38,7 @@ The dbt project follows a three-layer convention:
 
 ### Lineage Snapshot
 
-![Ad network lineage graph](docs/assets/ad_network_lineage.svg)
+![Ad network lineage graph](docs/assets/lineage.png)
 
 ### Final Fact Table Cheat Sheet
 
@@ -66,6 +70,10 @@ The `safe_divide` macro (see `macros/safe_divide.sql`) guarantees the calculated
 - `codes/dbt_generate_stage_models.py` – Example script that scaffolds staging models with the dbt Codegen package.
 - `Makefile` – Handy shortcuts for docs (`make docs`), linting (`make lint` / `make fix`), formatting (`make fmt`), and environment bootstrapping (`make debug`).
 - `env_vars.sh` – Shell helper to load credentials like `MOTHERDUCK_TOKEN` prior to running dbt locally.
+- GitHub Actions (see `.github/workflows/`) – Automated checks and deploys:
+  - `ci.yml` validates branch naming, installs dependencies, runs slim CI (`dbt run`/`dbt test` on modified models), and linting on pull requests.
+  - `cd.yml` builds the project against the prod target on pushes to `main` and persists the prod manifest back to the repo for deferred builds.
+  - `dbt_docs.yml` regenerates dbt docs on `main` pushes and publishes them to the `gh-pages` branch via GitHub Pages.
 
 ## Intern Model Review
 

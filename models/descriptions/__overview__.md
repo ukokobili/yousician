@@ -1,9 +1,9 @@
 {% docs __overview__ %}
 
-# Welcome to the Yousician Marketing Ads Model Documentation
+# Welcome to the Ovecell Marketing Ads Model Documentation
 
 ## **What does this documentation cover?**
-The documentation included here details the design of the Ad Network tables and views available via [yousician](https://yousician.com/). For more information on how these models are built, please see [the github repository.](https://github.com/ukokobili/yousician)
+The documentation included here details the design of the Ad Network tables and views available via [Ovecell](https://yousician.com/). For more information on how these models are built, please see [the github repository.](https://github.com/ukokobili/yousician)
 
 ## **How do I use these docs?**
 The easiest way to navigate this documentation is to use the Quick Link below. This link will take you to the documentation for each table, which contains a description, a list of the columns, and other helpful information.
@@ -16,7 +16,7 @@ There is more information on how to use dbt docs in the last section of this doc
 
 **Click on the links below to jump to the documentation for each schema.**
 
-### Mart Tables (`YOUSICIAN`.`MART`.`<table_name>`)
+### Mart Tables (`OVECELL`.`MART`.`<table_name>`)
 
 **Fact Table:**
 - [fct__geo_marketing_performance](#!/model/model.yousician.fct__ae_ad_network_geo_performance)
@@ -24,13 +24,13 @@ There is more information on how to use dbt docs in the last section of this doc
 
 ## **Data Model Overview**
 
-The Ad Network models are built a few different ways, but the mart fact tables are built using three layers of sql models: **staging, intermidate, and mart.**
+The Ovecell ad network pipeline surfaces a single cross-network fact table for campaign performance by geo. The mart layer relies on three tiers of dbt models: **staging, intermediate, and mart.**
 
-- Staging: Data is loaded in from the source as a view with light transformation.
-- Intermediate: All necessary parsing, filtering, de-duping, and other transformations are done here.
-- Mart: Final tables that are available for the end user
+- Staging: Data is loaded in from the raw ad-network exports with light renaming and typing (for example, campaign updates are deduplicated using `dbt_utils.deduplicate` to yield the freshest metadata).
+- Intermediate: Detailed and country-level feeds from Ad Network 1 are blended to keep the most granular geography available while falling back to country-only rows when needed.
+- Mart: Final tables that are available for end users, including metric calculations such as CTR, CPC, and CPM generated with the shared `safe_divide` macro.
 
-The dimension tables are sourced from Yousician's Backend sources.
+The dimension tables are sourced from Ovecell's backend sources.
 
 
 ## **Using dbt docs**
@@ -54,7 +54,7 @@ Note that you can also right-click on models to interactively filter and explore
 
 
 ### **More information**
-- [Yousician](https://yousician.com/)
+- [Ovecell](https://yousician.com/)
 - [What is dbt?](https://docs.getdbt.com/docs/introduction)
 
 

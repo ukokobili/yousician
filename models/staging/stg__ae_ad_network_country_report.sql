@@ -9,14 +9,14 @@ renamed as (
 
     select
         -- dates & ids
-        date,
-        campaign_id,
-        country_id,
+        date as date,
+        campaign_id as campaign_id,
+        country_id as country_id,
 
         -- metrics
-        spend,
-        impressions,
-        clicks,
+        spend as spend,
+        impressions as impressions,
+        clicks as clicks,
 
         -- metadata columns
         current_timestamp as loaded_at
