@@ -22,6 +22,7 @@ ad_network_geo_performance as (
         -- geo info
         country_code,
         state_name,
+        location_type,
 
         -- metrics
         spend,
@@ -52,6 +53,7 @@ ad_network_geo_performance as (
         -- geo info
         country_code,
         state_name,
+        location_type,
 
         -- metrics
         spend,

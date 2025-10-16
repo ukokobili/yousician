@@ -26,6 +26,7 @@ state_ads as (
         -- geo info
         geo_dictionary.country_code,
         geo_dictionary.location_name as state_name,
+        geo_dictionary.location_type,
 
         -- metrics
         detailed_report.spend,
@@ -54,6 +55,7 @@ country_ads as (
         -- geo info
         geo_dictionary.country_code,
         null as state_name,
+        geo_dictionary.location_type,
 
         -- metrics
         country_report.spend,

@@ -35,6 +35,10 @@ models:
         data_type: varchar
         description: "State name of the ad performance data"
 
+      - name: location_type
+        data_type: varchar
+        description: "Type of the location (e.g., city, region)"
+
       - name: spend
         data_type: double
         description: "Total spend for the ad campaign on the given date and geo"
