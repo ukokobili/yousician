@@ -14,6 +14,7 @@ renamed as (
         -- geo info
         null as country_code,
         null as state_name,
+        null as location_type,
 
         -- metrics
         spend,

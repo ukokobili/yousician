@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+  <defs>
+    <style>
+      .box { fill: #f7fbff; stroke: #1f77b4; stroke-width: 2; rx: 8; ry: 8; }
+      .fact { fill: #fef6e4; stroke: #d97706; stroke-width: 2; rx: 8; ry: 8; }
+      .source { fill: #f1f5f9; stroke: #475569; stroke-width: 2; rx: 8; ry: 8; }
+      .title { font: 18px 'Courier New', monospace; fill: #0f172a; }
+      .subtitle { font: 14px 'Courier New', monospace; fill: #334155; }
+      .label { font: 16px 'Courier New', monospace; fill: #0f172a; }
+    </style>
+    <marker id="arrow" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" viewBox="0 0 12 12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <text x="40" y="60" class="title">Ovecell Ads Lineage</text>
+  <text x="40" y="90" class="subtitle">Staging -&gt; Intermediate -&gt; Mart</text>
+
+  <!-- Staging boxes -->
+  <rect class="box" x="60" y="150" width="310" height="70"/>
+  <text class="label" x="75" y="190">stg__ae_ad_network_geo_dictionary</text>
+
+  <rect class="box" x="60" y="250" width="310" height="70"/>
+  <text class="label" x="75" y="290">stg__ae_ad_network_campaign_updates</text>
+
+  <rect class="box" x="60" y="350" width="310" height="70"/>
+  <text class="label" x="75" y="390">stg__ae_ad_network_country_report</text>
+
+  <rect class="box" x="60" y="450" width="310" height="70"/>
+  <text class="label" x="75" y="490">stg__ae_ad_network_detailed_report</text>
+
+  <rect class="box" x="60" y="550" width="310" height="70"/>
+  <text class="label" x="75" y="590">stg__ae_ad_network_report_2</text>
+
+  <!-- Raw source -->
+  <rect class="source" x="60" y="650" width="310" height="70"/>
+  <text class="label" x="75" y="690">ae_ad_network_report_2 (source)</text>
+
+  <!-- Intermediate -->
+  <rect class="box" x="470" y="280" width="320" height="90"/>
+  <text class="label" x="485" y="330">int__ae_ad_network_country_state_performance</text>
+
+  <!-- Fact -->
+  <rect class="fact" x="880" y="280" width="280" height="90"/>
+  <text class="label" x="895" y="330">fct__ae_ad_network_geo_performance</text>
+
+  <!-- Connectors -->
+  <line x1="370" y1="185" x2="470" y2="325" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="370" y1="285" x2="470" y2="325" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="370" y1="385" x2="470" y2="325" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="370" y1="485" x2="470" y2="325" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <line x1="790" y1="325" x2="880" y2="325" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="370" y1="585" x2="880" y2="325" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <line x1="210" y1="650" x2="210" y2="620" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>

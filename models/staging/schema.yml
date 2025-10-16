@@ -168,6 +168,10 @@ models:
         data_type: "null"
         description: "Name of the state"
 
+      - name: location_type
+        data_type: "null"
+        description: "Type of the location (e.g., city, region)"
+
       - name: spend
         data_type: double
         description: "Total spend for the ad campaign on the given date and state"
