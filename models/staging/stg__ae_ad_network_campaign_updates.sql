@@ -15,7 +15,7 @@ deduplicated as (
 renamed as (
     select
         -- ids & dates
-        campaign_id,
+        campaign_id as campaign_id,
         update_date as updated_date,
 
         -- campaign info

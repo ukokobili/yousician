@@ -10,9 +10,9 @@ renamed as (
     select
         -- ids & geo info
         id as location_id,
-        country_code,
+        country_code as country_code,
         name as location_name,
-        location_type,
+        location_type as location_type,
 
         -- metadata columns
         current_timestamp as loaded_at
