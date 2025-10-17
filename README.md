@@ -10,7 +10,7 @@ Welcome! This repository captures the deliverables for the Ovecell Analytics Eng
 ## Deliverables
 
 1. **Cross-network geo marketing mart** – `models/marts/fct__ae_ad_network_geo_performance.sql` unifies both ad networks, enriches the data with geo dictionary attributes, and standardizes metrics such as CTR, CPC, and CPM. The model is documented in `models/marts/fct__ae_ad_network_geo_performance.yml`.
-2. **Intern SQL review summary** – See [Intern Model Review](#intern-model-review) for the feedback provided to the new teammate working on `dim_activity.sql`.
+2. **Intern SQL review summary** – See [Intern Model Review](codes/dim_activity_review.md) for the feedback provided to the new teammate working on `dim_activity.sql`.
 
 ## Source Data
 
@@ -77,14 +77,15 @@ The `safe_divide` macro (see `macros/safe_divide.sql`) guarantees the calculated
 
 ## Intern Model Review
 
-The intern’s `dim_activity.sql` proposal was reviewed with a focus on clarity, performance, and maintainability. Highlights from the feedback:
+The full set of review notes for the intern’s `dim_activity.sql` model lives in [`codes/dim_activity_review.md`](codes/dim_activity_review.md). The write-up keeps the guidance simple and mirrors the revised query structure so junior teammates can follow along without context switching.
 
-- Encourage the use of CTEs scoped to the specific grain (user + event type) to trim redundant joins and window functions.
-- Replace repeated subqueries that scan the full events table with filtered staging models or temp tables materialized upstream.
-- Suggest leveraging dbt incremental materializations only after the base model is performant; premature incrementals can hide underlying inefficiencies.
-- Recommend documenting business rules for “first song”, “last song”, and “challenge play” directly in model descriptions to aid future analysts.
+Key reminders called out in the review:
+- Replace the sign-up correlated subquery with a grouped CTE that keeps only the first login per user.
+- Use `min_by` / `max_by` to surface first/last songs instead of heavier window scans.
+- Add time-based predicates when joining to challenge events to avoid cartesian row explosions, then `QUALIFY` the closest match.
+- Hold off on incremental downstream tables until the base model runs fast against full history.
 
-These notes are included here so the marketing and product analytics teams have shared visibility without leaving the repo.
+Marketing and product analytics can reference the markdown file directly as the intern iterates.
 
 ## Getting Started
 
