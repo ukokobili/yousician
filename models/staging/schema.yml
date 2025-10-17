@@ -4,14 +4,14 @@ models:
     columns:
       - name: campaign_id
         data_type: bigint
-        description: "Unique identifier for the ad campaign"
+        description: "Unique identifier for the ad campaign."
         data_tests: 
           - not_null
           - unique
 
       - name: updated_date
         data_type: date
-        description: "Date when the campaign was last updated"
+        description: "Date when the campaign was last updated."
         data_tests:
           - dbt_expectations.expect_column_values_to_be_in_type_list:
               arguments:
